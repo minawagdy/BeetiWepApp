@@ -3,11 +3,11 @@
 @section('content')
 
 <h2 class="intro-y text-lg font-medium mt-10">
-    Categories
+    Products
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <a href="{{route('advertising.store')}}" class="btn btn-primary shadow-md mr-2">{{__('Add New Advertise')}}</a>
+        <a href="{{route('category.store')}}" class="btn btn-primary shadow-md mr-2">{{__('Add New Product')}}</a>
         <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
@@ -31,8 +31,8 @@
                 <div class="box p-5 zoom-in">
                     <div class="flex items-center">
                         <div class="w-2/4 flex-none">
-                            <div style="min-width: 250px;" class="text-lg font-medium truncate">{{__('Total  Advertises')}}</div>
-                            <div class="text-slate-500 mt-1">{{$all_ads}}</div>
+                            <div style="min-width: 250px;" class="text-lg font-medium truncate">{{__('Total Products')}}</div>
+                            <div class="text-slate-500 mt-1">{{$totalcount}}</div>
                         </div>
                         <div class="flex-none ml-auto relative">
 
@@ -46,8 +46,8 @@
             <div class="box p-5 zoom-in">
                 <div class="flex items-center">
                     <div class="w-2/4 flex-none">
-                        <div style="min-width: 250px;" class="text-lg font-medium truncate">{{__('Current Advertises')}}</div>
-                        <div class="text-slate-500 mt-1">{{$active_ads}}</div>
+                        <div style="min-width: 250px;" class="text-lg font-medium truncate">{{__('Pending Products')}}</div>
+                        <div class="text-slate-500 mt-1">{{$pending_product}}</div>
                     </div>
                     <div class="flex-none ml-auto relative">
 
@@ -70,40 +70,35 @@
             <tr>
                 <th class="whitespace-nowrap">IMAGES</th>
                 <th class="whitespace-nowrap">Title</th>
-                <th class="whitespace-nowrap">Expiry Date</th>
-
                 <th class="text-center whitespace-nowrap">STATUS</th>
                 <th class="text-center whitespace-nowrap">ACTIONS</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($ads as $ad)
+            @foreach($products as $product)
             <tr class="intro-x">
                 <td class="w-50">
                     <div class="flex">
                         <div class="w-10 h-10 image-fit zoom-in">
-                            <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="{{$ad->image}}" title="{{$ad->title}}">
+                            <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" @if(count($product->images)!=0)) src="{{$product->images[0]->image_name}}" @endif title="{{$product->title}}">
                         </div>
 
                     </div>
                 </td>
                 <td>
-                    <a href="" class="font-medium whitespace-nowrap">{{$ad->title}}</a>
-                </td>
-                <td>
-                    <a href="" class="font-medium whitespace-nowrap">{{$ad->expiry_date}}</a>
+                    <a href="" class="font-medium whitespace-nowrap">{{$product->title}}</a>
                 </td>
                 
                 <td class="w-40">
                     <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
-                        <input   class="show-code form-check-input mr-0 ml-3 checkboxAdsId" type="checkbox" @if($ad->is_active==1) {{'checked'}}@endif value="{{$ad->is_active}}" name="adsId" data-ads-id="{{$ad->id}}">
+                        <input   class="show-code form-check-input mr-0 ml-3 checkboxId" type="checkbox" @if($product->is_active==1) {{'checked'}}@endif value="{{$product->is_active}}" name="ctegoryId" data-category-id="{{$product->id}}">
                     </div>
                 </td>
                 <td class="table-report__action w-56">
                     <div class="flex justify-center items-center">
-                        <a class="flex items-center mr-3" href="{{ route('advertising.edit', ['id' => $ad->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                        <a class="flex items-center mr-3" href="{{ route('category.edit', ['id' => $product->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                         <!-- <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a> -->
-                        <a class="flex items-center text-danger" href="{{ route('advertising.destroy', ['id' => $ad->id]) }}" > <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                        <a class="flex items-center text-danger" href="{{ route('category.destroy', ['id' => $product->id]) }}" > <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
 
                     </div>
                 </td>
@@ -161,7 +156,7 @@
                 </div>
                 <div class="px-5 pb-8 text-center">
                     <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                    <a href="{{ route('category.destroy', ['id' => $ad->id]) }}" type="button" class="btn btn-danger w-24">Delete</a>
+                    <a href="{{ route('category.destroy', ['id' => $product->id]) }}" type="button" class="btn btn-danger w-24">Delete</a>
                 </div>
             </div>
         </div>

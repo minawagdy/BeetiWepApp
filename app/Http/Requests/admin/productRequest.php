@@ -4,7 +4,7 @@ namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class advertisingRequest extends FormRequest
+class productRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +21,16 @@ class advertisingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return  [
-            'title'    => 'required',
+        return [
+            'title' => 'required',
             'title_ar' => 'required',
-            // 'image'    => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'link' =>'required',
-            'expiry_date' =>'required',
-            'provider_id'  => 'required|exists:App\Models\Provider,id'
+            'description'=>'required',
+            'description_ar'=>'required',
+            // 'logo' => 'required|image|mimes:jpeg,png,jpg,gif',
+            // 'country'=>'required'
 
+            // Add more validation rules as needed
         ];
-
     }
 
     public function messages()
@@ -40,5 +40,4 @@ class advertisingRequest extends FormRequest
 //            'title_ar.required' => 'Title Ar is required!',
         ];
     }
-
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdvertisingController;
 use App\Http\Controllers\Admin\ProductiveFamilyController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\TwilioSMSController;
 /*
@@ -39,11 +40,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('adminDashboard');
     Route::get('categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('category', [CategoryController::class, 'create']);
-    Route::post('category', [CategoryController::class, 'store']);
-    Route::get('category/edit/{id}', [CategoryController::class, 'edit']);
-    Route::post('category/edit/{id}', [CategoryController::class, 'update'])->name('form.update');
+    Route::post('category', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('category/edit/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::put('/category/{id}', 'FormController@update')->name('form.update');
-    Route::delete('category/{id}', [CategoryController::class, 'delete']);
+    Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('dropdown1', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown1']);
     Route::get('dropdown2/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown2']);
     Route::get('dropdown3/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown3']);
@@ -51,9 +52,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('advertising', [AdvertisingController::class, 'index'])->name('advertising');
     Route::get('advertising/create',    [AdvertisingController::class, 'create']);
     Route::post('advertising/create',   [AdvertisingController::class, 'store'])->name('advertising.store');
-    Route::get('advertising/edit/{id}', [AdvertisingController::class, 'edit']);
+    Route::get('advertising/edit/{id}', [AdvertisingController::class, 'edit'])->name('advertising.edit');
     Route::put('advertising/edit/{id}', [AdvertisingController::class, 'update'])->name('advertising.update');
+    Route::get('/checkbox/ads/update',  [AdvertisingController::class,'updateAdsCheckbox'])->name('checkbox.ads.update');
+    Route::get('advertising/delete/{id}', [AdvertisingController::class, 'destroy'])->name('advertising.destroy');
     Route::get('productive-families', [ProductiveFamilyController::class, 'index'])->name('productive-families');
     Route::get('orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('products', [ProductController::class, 'index'])->name('products');
+
     });
 });

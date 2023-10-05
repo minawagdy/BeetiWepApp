@@ -13,7 +13,7 @@
                 Add Category
             </h2>
 
-            <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('category')}}" enctype="multipart/form-data">
+            <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{route('category.store')}}" enctype="multipart/form-data">
 
             @csrf
 

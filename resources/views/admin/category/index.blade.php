@@ -7,7 +7,7 @@
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <button class="btn btn-primary shadow-md mr-2">{{__('Add New Category')}}</button>
+        <a href="{{route('category.store')}}" class="btn btn-primary shadow-md mr-2">{{__('Add New Category')}}</a>
         <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
@@ -70,7 +70,6 @@
             <tr>
                 <th class="whitespace-nowrap">IMAGES</th>
                 <th class="whitespace-nowrap">CATEGORY NAME</th>
-                <th class="whitespace-nowrap">SLUG</th>
                 <th class="text-center whitespace-nowrap">STATUS</th>
                 <th class="text-center whitespace-nowrap">ACTIONS</th>
             </tr>
@@ -78,7 +77,7 @@
             <tbody>
             @foreach($categories as $category)
             <tr class="intro-x">
-                <td class="w-40">
+                <td class="w-50">
                     <div class="flex">
                         <div class="w-10 h-10 image-fit zoom-in">
                             <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="{{$category->logo}}" title="{{$category->title}}">
@@ -88,11 +87,8 @@
                 </td>
                 <td>
                     <a href="" class="font-medium whitespace-nowrap">{{$category->title}}</a>
-                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{$category->description}}</div>
                 </td>
-                <td>
-                    <a class="text-slate-500 flex items-center mr-3" href="javascript:;"> <i data-lucide="external-link" class="w-4 h-4 mr-2"></i> /categories/kids-and-baby </a>
-                </td>
+                
                 <td class="w-40">
                     <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
                         <input   class="show-code form-check-input mr-0 ml-3 checkboxId" type="checkbox" @if($category->published==1) {{'checked'}}@endif value="{{$category->published}}" name="ctegoryId" data-category-id="{{$category->id}}">
@@ -100,8 +96,10 @@
                 </td>
                 <td class="table-report__action w-56">
                     <div class="flex justify-center items-center">
-                        <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                        <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                        <a class="flex items-center mr-3" href="{{ route('category.edit', ['id' => $category->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                        <!-- <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a> -->
+                        <a class="flex items-center text-danger" href="{{ route('category.destroy', ['id' => $category->id]) }}" > <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+
                     </div>
                 </td>
             </tr>
@@ -158,7 +156,7 @@
                 </div>
                 <div class="px-5 pb-8 text-center">
                     <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                    <button type="button" class="btn btn-danger w-24">Delete</button>
+                    <a href="{{ route('category.destroy', ['id' => $category->id]) }}" type="button" class="btn btn-danger w-24">Delete</a>
                 </div>
             </div>
         </div>

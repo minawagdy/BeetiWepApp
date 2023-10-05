@@ -5,22 +5,37 @@ namespace App\Repositories\Admin;
 use App\Http\Requests\admin\advertisingRequest;
 use App\Interfaces\Admin\AdvertisingRepositoryInterface;
 use App\Models\ProviderAd;
+use App\Models\Provider;
 use Validator;
-
+use Session;
 class AdvertisingRepository implements AdvertisingRepositoryInterface
 {
 
     public function getAllAdvertising()
     {
-        $ads  = ProviderAd::whereHas('provider', function ($query)  {
-                $query->where('country', '=', 63);
-            })->where('is_active',1)->get();
+        $all_ads = \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
+            $q->where('country', '=', Session::get('country'));
+        })->get()->count();
 
-        return view('admin.advertising.index',compact('ads'));
+        $active_ads = \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
+            $q->where('country', '=', Session::get('country'));
+        })->where('is_active',1)->get()->count();
+        $deactive_ads = \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
+            $q->where('country', '=', Session::get('country'));
+        })->where('is_active',0)->get()->count();
+
+
+    
+        $ads  =  \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
+                $q->where('country', '=', Session::get('country'));
+            })->get();
+
+        return view('admin.advertising.index',compact('ads','all_ads','active_ads','deactive_ads'));
 
     }
     public function  createAdvertising(){
-        return view('admin.advertising.create');
+        $providers = Provider::where('country', Session::get('country'))->where('published',1)->orderby('name')->get();
+        return view('admin.advertising.create',compact('providers'));
 
     }
     public function storeAdvertising(advertisingRequest $request)
@@ -38,16 +53,18 @@ class AdvertisingRepository implements AdvertisingRepositoryInterface
                 $request->image->move(public_path('/storage/Ads_images'), $imageName);
                 $row->image = $imageName;
                 $row->save();
-                return redirect('advertising');
+                return  redirect()->route('advertising');
+
             }
 
         }
     }
     public function editAdvertising($id){
 
-        $row = ProviderAd::findOrFail(1);
+        $row = ProviderAd::findOrFail($id);
+        $providers = Provider::where('country', Session::get('country'))->where('published',1)->orderby('name')->get();
 
-        return view('admin.advertising.edit',compact('row','id'));
+        return view('admin.advertising.edit',compact('row','providers'));
     }
     public function updateAdvertising($id, advertisingRequest $request)
     {
@@ -63,15 +80,27 @@ class AdvertisingRepository implements AdvertisingRepositoryInterface
                 $row->save();
             }
         }
+        return  redirect()->route('advertising');
+ 
     }
 
     public function deleteAdvertising($id) {
 
         $row = ProviderAd::findOrFail($id);
         $row->delete();
-        return response()->json(['isSuccessed' =>true,"data"=>true,'error'=>null], 200);
+        return  redirect()->route('advertising');
 
     }
+
+    public function updateCheckboxAds($adsId, $checkboxValue)
+    {
+        $ads = ProviderAd::find($adsId);
+        $ads->is_active = $checkboxValue;
+        $ads->save();
+
+        return $ads;
+    }
+
 
 
 

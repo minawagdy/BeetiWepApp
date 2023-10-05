@@ -13,7 +13,7 @@
                     Edit Advertising
                 </h2>
 
-                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{route('advertising.update',['id' => $id])}}" enctype="multipart/form-data">
+                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{route('advertising.update',['id' => $row->id])}}" enctype="multipart/form-data">
                 @method('PUT')
 
                 @csrf
@@ -61,14 +61,15 @@
                     <div class="error">{{ $message }}</div>
                     @enderror
                     <div>
-                        <label>Basic</label>
+                        <label>Providers</label>
                         <div class="mt-2">
                             <select data-placeholder="Select Provider" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="provider_id">
-                                <option value="1" selected="true">Leonardo DiCaprio</option>
-                                <option value="39">Johnny Deep</option>
-                                <option value="3">Robert Downey, Jr</option>
-                                <option value="4">Samuel L. Jackson</option>
-                                <option value="5">Morgan Freeman</option>
+                                <option value="{{$row->provider->id}}" selected="true">{{$row->provider->name}}</option>
+                                @foreach($providers as $provider)
+                                @if($provider->id != $row->provider->id)
+                                <option value="{{$provider->id}}">{{$provider->name}}</option>
+                                @endif
+                                @endforeach
                             </select>
 
                         </div>

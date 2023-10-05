@@ -10,7 +10,7 @@
     <div class="intro-y box">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
         </div>
-            <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{ url('category/edit/'.$category->id)}}" enctype="multipart/form-data">
+            <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{ route('category.update', ['id' => $category->id]) }}" enctype="multipart/form-data">
 
             @csrf
 
@@ -47,7 +47,7 @@
                 <div class="error">{{ $message }}</div>
                 @enderror
                 <div class="mt-3">
-                    <img src="{{$category->logo}}">
+                    <img style="width:100px;height:100px;" src="{{$category->logo}}">
                     <label for="vertical-form-2" class="form-label">Logo</label>
                     <input id="vertical-form-2" class="form-control" type="file" name="logo">
                 </div>
@@ -72,7 +72,7 @@
                         @enderror
                     </div>
                 </div>
-                <button class="btn btn-primary mt-5">{{__('Submit')}}</button>
+                <button type="submit" class="btn btn-primary mt-5">{{__('Submit')}}</button>
             </div>
             <div class="source-code hidden">
                 <button data-target="#copy-vertical-form" class="copy-code btn py-1 px-2 btn-outline-secondary"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="file" data-lucide="file" class="lucide lucide-file w-4 h-4 mr-2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Copy example code </button>

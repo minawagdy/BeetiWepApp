@@ -2,27 +2,27 @@
 
 namespace App\Repositories\Admin;
 
-use App\Http\Requests\admin\categoryRequest;
-use App\Interfaces\Admin\CategoryRepositoryInterface;
-use App\Models\Category;
-use App\Models\CategoryCountries;
-use App\Models\Countries;
+use App\Http\Requests\admin\productRequest;
+use App\Interfaces\Admin\productRepositoryInterface;
+use App\Models\Product;
 use Validator;
 use Session;
-class CategoryRepository implements CategoryRepositoryInterface
+
+class ProductRepository implements ProductRepositoryInterface
 {
-    public function getAllCategories()
+    public function getAllProducts()
     {
-        $categories      = Category::whereHas('countries', function ($query) {
-            $query->where('country_id', Session::get('country'));
+        $products = Product::with(['provider','images','category'])->whereHas('provider', function ($q) {
+            $q->where('country', '=', session()->get('country'));
         })->get();
-        $categoryCount = Category::whereHas('countries', function ($query) {
-            $query->where('country_id', Session::get('country'));
-        })->withCount('countries')->count();
-        $categorytNotApprovedCount =Category::whereHas('countries', function ($query) {
-            $query->where('country_id', Session::get('country'));
-        })->withCount('countries')->where('published',0)->count();
-        return view('admin.category.index',compact('categories','categoryCount','categorytNotApprovedCount'));
+        $totalcount =   Product::with(['provider','images','category'])->whereHas('provider', function ($q) {
+            $q->where('country', '=', session()->get('country'));
+        })->count();
+        $pending_product =Product::where('approved_by_admin','0')->whereHas('provider', function ($q) {
+            $q->where('country', '=', session()->get('country'));
+            })->count();
+    
+        return view('admin.product.index',compact('products','totalcount','pending_product'));
 
     }
 

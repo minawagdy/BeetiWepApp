@@ -13,6 +13,8 @@ interface AdvertisingRepositoryInterface
     public function editAdvertising($id);
     public function updateAdvertising($id, advertisingRequest $request);
     public function deleteAdvertising($id);
+    public function updateCheckboxAds($adsId, $checkboxValue);
+
 
 
 }

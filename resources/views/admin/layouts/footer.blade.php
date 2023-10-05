@@ -130,6 +130,32 @@
             });
         });
     });
+
+    $(document).ready(function() {
+        $('.checkboxAdsId').change(function() {
+            var checkboxValue = $(this).is(':checked')? 1 : 0;;
+            var adsId = $(this).data('ads-id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '{{ route('checkbox.ads.update') }}',
+                type: 'GET',
+                data: {
+                    checkboxValue: checkboxValue,
+                    adsId: adsId
+                },
+                success: function(response) {
+                    console.log('Checkbox updated successfully');
+                },
+                error: function(xhr) {
+                    console.log('Error updating checkbox');
+                }
+            });
+        });
+    });
 </script>
 
 <!-- END: JS Assets-->

@@ -26,8 +26,8 @@ class categoryRequest extends FormRequest
             'title_ar' => 'required',
             'description'=>'required',
             'description_ar'=>'required',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'country'=>'required'
+            // 'logo' => 'required|image|mimes:jpeg,png,jpg,gif',
+            // 'country'=>'required'
 
             // Add more validation rules as needed
         ];

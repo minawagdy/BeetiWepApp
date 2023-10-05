@@ -59,14 +59,13 @@
                     <div class="error">{{ $message }}</div>
                     @enderror
                     <div>
-                        <label>Basic</label>
+                        <label>Providers</label>
                         <div class="mt-2">
                             <select data-placeholder="Select Provider" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="provider_id">
-                                <option value="1" selected="true">Leonardo DiCaprio</option>
-                                <option value="39">Johnny Deep</option>
-                                <option value="3">Robert Downey, Jr</option>
-                                <option value="4">Samuel L. Jackson</option>
-                                <option value="5">Morgan Freeman</option>
+                                <option selected="true" value="">Select Provider</option>
+                                @foreach($providers as $provider)
+                                <option value="{{$provider->id}}" >{{$provider->name}}</option>
+                               @endforeach
                             </select>
 
                     </div>

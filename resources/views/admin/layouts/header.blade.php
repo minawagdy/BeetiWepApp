@@ -657,7 +657,6 @@
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
         </nav>
-        <form action="" method="">
         <select class="mx-auto" id="dropdown1" name="country">
             <option></option>
             @foreach($countries as $country)

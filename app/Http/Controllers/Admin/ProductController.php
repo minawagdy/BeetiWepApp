@@ -3,26 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\categoryRequest;
-use App\Interfaces\Admin\CategoryRepositoryInterface;
-use Illuminate\Http\JsonResponse;
+use App\Http\Requests\admin\productRequest;
+use App\Interfaces\Admin\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Stevebauman\Location\Facades\Location;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
-    private CategoryRepositoryInterface $CategoryRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
 
     }
 
     public function index()
     {
-       return $this->categoryRepository->getAllCategories();
+       return $this->productRepository->getAllProducts();
     }
 
     public function updateCheckbox(Request $request)
