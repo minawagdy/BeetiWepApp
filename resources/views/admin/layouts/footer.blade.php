@@ -156,6 +156,19 @@
             });
         });
     });
+    var i = 0;
+       
+       $("#add").click(function(){
+      
+           ++i;
+      
+           $("#dynamicTable").append('<tr><td><input type="text" name="prices['+i+'][title]" placeholder="Enter your Title" class="form-control" /></td><td><input type="text" name="prices['+i+'][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td><td><input type="text" name="prices['+i+'][price]" placeholder="Enter your Price" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+       });
+      
+       $(document).on('click', '.remove-tr', function(){  
+            $(this).parents('tr').remove();
+       });  
+      
 </script>
 
 <!-- END: JS Assets-->

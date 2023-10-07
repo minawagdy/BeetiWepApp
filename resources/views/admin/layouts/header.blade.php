@@ -946,6 +946,35 @@
 {{--                        </li>--}}
 {{--                    </ul>--}}
                 </li>
+
+                <li>
+                    <a href="{{url('admin/products')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="tag"></i> </div>
+                        <div class="side-menu__title">
+                            Products
+                        </div>
+                    </a>
+{{--                    <ul class="">--}}
+{{--                        <li>--}}
+{{--                            <a href="side-menu-light-dashboard-overview-1.html" class="side-menu">--}}
+{{--                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>--}}
+{{--                                <div class="side-menu__title"> Side Menu </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a href="simple-menu-light-dashboard-overview-1.html" class="side-menu">--}}
+{{--                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>--}}
+{{--                                <div class="side-menu__title"> Simple Menu </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a href="top-menu-light-dashboard-overview-1.html" class="side-menu">--}}
+{{--                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>--}}
+{{--                                <div class="side-menu__title"> Top Menu </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+                </li>
                 <li>
                     <a href="{{url('admin/advertising')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="clipboard"></i> </div>

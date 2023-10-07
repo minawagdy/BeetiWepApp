@@ -7,7 +7,7 @@
 </h2>
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <a href="{{route('category.store')}}" class="btn btn-primary shadow-md mr-2">{{__('Add New Product')}}</a>
+        <a href="{{route('product.store')}}" class="btn btn-primary shadow-md mr-2">{{__('Add New Product')}}</a>
         <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
@@ -96,9 +96,9 @@
                 </td>
                 <td class="table-report__action w-56">
                     <div class="flex justify-center items-center">
-                        <a class="flex items-center mr-3" href="{{ route('category.edit', ['id' => $product->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                        <a class="flex items-center mr-3" href="{{ route('product.edit', ['id' => $product->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                         <!-- <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a> -->
-                        <a class="flex items-center text-danger" href="{{ route('category.destroy', ['id' => $product->id]) }}" > <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                        <a class="flex items-center text-danger" href="{{ route('product.destroy', ['id' => $product->id]) }}" > <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
 
                     </div>
                 </td>

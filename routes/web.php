@@ -59,6 +59,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('productive-families', [ProductiveFamilyController::class, 'index'])->name('productive-families');
     Route::get('orders', [OrderController::class, 'index'])->name('orders');
     Route::get('products', [ProductController::class, 'index'])->name('products');
+    Route::get('product/create',    [ProductController::class, 'create']);
+    Route::post('product/create',   [ProductController::class, 'store'])->name('product.store');
+    Route::get('product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('product/edit/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
 
     });
 });

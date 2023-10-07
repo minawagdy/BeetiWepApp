@@ -22,13 +22,15 @@ class productRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'title_ar' => 'required',
-            'description'=>'required',
-            'description_ar'=>'required',
-            // 'logo' => 'required|image|mimes:jpeg,png,jpg,gif',
-            // 'country'=>'required'
-
+            'title' => 'required|string|max:25',
+            'title_ar' => 'required|string|max:25',
+            'description' => 'required|string|max:100',
+            'description_ar' => 'required|string|max:100',
+            'category_id' => 'required|exists:App\Models\Category,id',
+            'provider_id' => 'required|exists:App\Models\Provider,id',
+            'prepare_time' => 'required|numeric|min:0',
+             'images' => 'max:5',
+            
             // Add more validation rules as needed
         ];
     }

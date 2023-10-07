@@ -35,16 +35,16 @@ class ProductController extends Controller
     }
     public function create()
     {
-        return $this->categoryRepository->create();
+        return $this->productRepository->createProduct();
 
     }
 
-    public function store(categoryRequest $request)
+    public function store(productRequest $request)
     {
 
-        $this->categoryRepository->createCategory($request);
+        $this->productRepository->storeProduct($request);
 
-        return redirect()->route('categories');
+        return redirect()->route('products');
 
     }
 
@@ -57,22 +57,22 @@ class ProductController extends Controller
             'data' => $this->categoryRepository->getAllCategoryById($ctegoryId)
         ]);
     }
-    public function edit($ctegoryId)
+    public function edit($productId)
     {
-      return  $category = $this->categoryRepository->editCategory($ctegoryId);
+      return  $this->productRepository->editProduct($productId);
 
     }
-    public function update(categoryRequest $request)
+    public function update(productRequest $request)
     {
     
-        $ctegoryId = $request->route('id');
-        return $this->categoryRepository->updateCategory($ctegoryId, $request);
+        $productId = $request->route('id');
+        return $this->productRepository->updateProduct($productId, $request);
 
     }
 
     public function destroy($id)
     {
-        return $this->categoryRepository->deleteCategory($id);
+        return $this->productRepository->deleteProduct($id);
 
     }
 }
