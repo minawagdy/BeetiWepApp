@@ -9,5 +9,5 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v2
       - name: git
-        run: cd /mnt/data/BeetiWepApp-main/html && git pull && docker exec BeetiWepApp-main_web_1 /var/www/html/autoexec.sh
+        run: cd /mnt/data/BeetiWepApp-main/html && git pull && docker exec BeetiWepApp-main /var/www/html/autoexec.sh
         
