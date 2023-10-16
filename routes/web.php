@@ -93,10 +93,10 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('products', 'App\Http\Controllers\Administration\Products@getIndex');
 Route::get('products/edit/{product_id}', 'App\Http\Controllers\Administration\Products@getEdit');
 Route::put('products/edit/{product_id}', 'App\Http\Controllers\Administration\Products@anyEdit')->name('products.update');
-Route::delete('products/delete/{product_id}', 'App\Http\Controllers\Administration\products@anyDelete');
-Route::get('products/delete-image/{image_id}', 'App\Http\Controllers\Administration\products@getDeleteImage');
-Route::get('products/create', 'App\Http\Controllers\Administration\products@getCreate')->name('products.create');
-Route::post('products/store', 'App\Http\Controllers\Administration\products@postCreate')->name('products.store');
+Route::delete('products/delete/{product_id}', 'App\Http\Controllers\Administration\Products@anyDelete');
+Route::get('products/delete-image/{image_id}', 'App\Http\Controllers\Administration\Products@getDeleteImage');
+Route::get('products/create', 'App\Http\Controllers\Administration\Products@getCreate')->name('products.create');
+Route::post('products/store', 'App\Http\Controllers\Administration\Products@postCreate')->name('products.store');
 
 
 Route::post('updateStatus/{id}','App\Http\Controllers\Administration\Products@updateStatus')->name('product.updateStatus');
