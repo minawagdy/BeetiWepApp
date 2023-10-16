@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Session;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+URL::forceRootUrl("https://beetiwepapp-main.dev.alefsoftware.com/");
+
+    URL::forceScheme('https');
+
+
 Route::get('/', [IndexController::class, 'index'])->name('index');
 // Route::get('/', function () {
 //     return view('welcome');
