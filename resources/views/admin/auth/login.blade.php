@@ -10,7 +10,7 @@
                     <div class="my-auto">
                         <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="{{asset('adminpanel/images/illustration.svg')}}">
                         <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
-                            A few more clicks to 
+                            A few more clicks to
                             <br>
                             sign in to your account.
                         </div>
@@ -19,7 +19,7 @@
                 </div>
                 <!-- END: Login Info -->
                 <!-- BEGIN: Login Form -->
-              
+
                 <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                     <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
@@ -64,7 +64,7 @@
                                 <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
                                 <label class="cursor-pointer select-none" for="remember-me">Remember me</label>
                             </div>
-                            <a href="">Forgot Password?</a> 
+                            <a href="">Forgot Password?</a>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button type="submit"  class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button>
@@ -83,9 +83,9 @@
             <div class="dark-mode-switcher__toggle border"></div>
         </div>
         <!-- END: Dark Mode Switcher-->
-        
+
         <!-- BEGIN: JS Assets-->
-        <script src="{{asset('admin/js/app.js')}}"></script>
+        <script src="{{asset('adminpanel/js/app.js')}}"></script>
         <!-- END: JS Assets-->
     </body>
 </html>
