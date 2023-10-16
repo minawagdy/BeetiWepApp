@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Session;
 
 URL::forceRootUrl("https://beetiwepapp-main.dev.alefsoftware.com/");
 
-    URL::forceScheme('https');
-
+URL::forceScheme('https');
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 // Route::get('/', function () {
