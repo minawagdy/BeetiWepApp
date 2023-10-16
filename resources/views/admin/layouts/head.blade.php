@@ -25,3 +25,22 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: CSS Assets-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
+<style>
+    .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .image-preview {
+        width: 60px;
+        height: 60px;
+        border: 1px solid #ccc;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 10px;
+    }
+</style>

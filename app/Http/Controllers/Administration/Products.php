@@ -144,7 +144,7 @@ class Products extends Controller
             if ($request->images) {
                         foreach($request->images as $i){
 
-                        $imageName = time() . '.' . $i->extension();
+                            $imageName = time().'-'.$i->getClientOriginalName();
                         $i->move(public_path('/storage/product_images'), $imageName);
                         //$product->images()->delete();
                         $image = $row->images()->create(['title' => $request->input('title')]);
@@ -155,7 +155,7 @@ class Products extends Controller
             // end images
 
             if($request->has('prices')){
-            // dd($request->prices);
+            //  dd($request->prices);
                     foreach($request->prices as $p){
                         if($p['price']){
                         $product_price = new ProductPrice();

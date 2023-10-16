@@ -66,15 +66,15 @@
                     imagePreview.css('background-image', 'url(' + file + ')');
                     $('#previewContainer').append(imagePreview);
 
-                    var removeButton = $('<span>').addClass('remove-button');
-                    removeButton.html('<i class="fas fa-trash"></i>');
-                    imagePreview.append(removeButton);
+                    // var removeButton = $('<span>').addClass('remove-button');
+                    // removeButton.html('<i class="fas fa-trash"></i>');
+                    // imagePreview.append(removeButton);
 
-                    removeButton.on('click', function() {
-                        var index = $(this).parent('.image-preview').index();
-                        filePreviews.splice(index, 1);
-                        $(this).parent('.image-preview').remove();
-                    });
+                    // removeButton.on('click', function() {
+                    //     var index = $(this).parent('.image-preview').index();
+                    //     filePreviews.splice(index, 1);
+                    //     $(this).parent('.image-preview').remove();
+                    // });
                 }
                 reader.readAsDataURL(files[i]);
             }
@@ -202,23 +202,39 @@
 
         // dynamic input prices
 
-        var i = 0;
+    //     var i = 0;
 
-       $("#add").click(function(){
+    //    $("#add").click(function(){
 
-           ++i;
+    //        ++i;
 
-           $("#dynamicTable").append('<tr><td><input type="text" name="prices['+i+'][title]" placeholder="Enter your Title" class="form-control" /></td><td><input type="text" name="prices['+i+'][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td><td><input type="text" name="prices['+i+'][price]" placeholder="Enter your Price" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
-       });
+    //        $("#dynamicTable").append('<tr><td><input type="text" name="prices['+i+'][title]" placeholder="Enter your Title" class="form-control" /></td><td><input type="text" name="prices['+i+'][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td><td><input type="text" name="prices['+i+'][price]" placeholder="Enter your Price" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+    //    });
 
-       $(document).on('click', '.remove-tr', function(){
-            $(this).parents('tr').remove();
-       });
+    //    $(document).on('click', '.remove-tr', function(){
+    //         $(this).parents('tr').remove();
+    //    });
 
         // end
 
 
     });
+</script>
+
+
+<script>
+    $('#row1').hide();
+$('#row2').hide();
+$('#row3').hide();
+$('#row4').hide();
+var c = 0;
+$('#add').click(function() {
+    c +=1;
+if(c <= 4){
+    $('#row'+c).show();
+}
+
+        });
 </script>
 
 <!-- END: JS Assets-->

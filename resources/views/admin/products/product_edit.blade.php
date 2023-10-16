@@ -1,24 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('content')
-<style>
-    .image-preview-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
 
-    .image-preview {
-        width: 60px;
-        height: 60px;
-        border: 1px solid #ccc;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin: 10px;
-    }
-</style>
     <h2 class="intro-y text-lg font-medium mt-10">
         Product
     </h2>
@@ -176,21 +159,43 @@
                         <label class="mt-3">Price</label>
                         <table class="table table-bordered mt-3" id="dynamicTable">
             <tr>
-                <th>Name</th>
-                <th>Qty</th>
+                <th>Title</th>
+                <th>Title Ar</th>
                 <th>Price</th>
-                <!-- <th>Action</th> -->
+                 <th>Action</th>
             </tr>
+
+
            @foreach($product->prices as $key=>$prices)
             <tr>
                 <td><input type="text" name="prices[{{$key}}][title]" placeholder="Enter your Title" class="form-control" value="{{$prices->title}}" /></td>
                 <td><input type="text" name="prices[{{$key}}][title_ar]" placeholder="Enter your Title Ar" class="form-control"  value="{{$prices->title_ar}}" /></td>
                 <td><input type="text" name="prices[{{$key}}][price]" placeholder="Enter your Price" class="form-control"  value="{{$prices->price}}" /></td>
+                @if($key==0)<td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>@endif
                 @endforeach
 
-                <!-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>   -->
+
             </tr>
+
+                                                @if(count($product->prices) <= 4)
+
+                                                @for($i=count($product->prices); $i<= 4; $i++)
+
+                                                <tr id='row{{$i}}'>
+                                                    <td><input type="text" name="prices[{{$i}}][title]" placeholder="Enter your Title" class="form-control" /></td>
+                                                    <td><input type="text" name="prices[{{$i}}][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td>
+                                                    <td><input type="text" name="prices[{{$i}}][price]" placeholder="Enter your Price" class="form-control" /></td>
+                                                    {{-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> --}}
+                                                </tr>
+
+                                                @endfor
+
+                                                @endif
         </table>
+
+
+
+
 
 
 
