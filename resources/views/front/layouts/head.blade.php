@@ -12,8 +12,8 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('front/assets/imgs/theme/favicon.svg')}}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('Front/assets/imgs/theme/favicon.svg')}}" />
     <!-- Template CSS -->
-    <link rel="stylesheet" href="{{asset('front/assets/css/plugins/animate.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('front/assets/css/main.css?v=5.6')}}" />
+    <link rel="stylesheet" href="{{asset('Front/assets/css/plugins/animate.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('Front/assets/css/main.css?v=5.6')}}" />
 </head>
