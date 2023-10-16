@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories\Front;
-use App\Interfaces\Front\IndexRepositoryInterface;
+use App\Interfaces\front\IndexRepositoryInterface;
 use App\Models\Category;
 use App\Models\Product;
 
