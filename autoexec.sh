@@ -4,4 +4,5 @@ composer update && composer dump-autoload &&
 chmod 777 -R storage bootstrap/cache &&
 php artisan optimize:clear &&
 php artisan optimize &&
+php artisan key:generate &&
 php artisan migrate --force --seed
