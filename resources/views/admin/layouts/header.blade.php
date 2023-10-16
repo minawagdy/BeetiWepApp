@@ -657,16 +657,44 @@
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
         </nav>
+        {{-- <form action="" method="">
         <select class="mx-auto" id="dropdown1" name="country">
             <option></option>
             @foreach($countries as $country)
                 <option  value="{{$country->id}}">{{$country->name}}</option>
             @endforeach
-            </form>
+
         </select>
+    </form> --}}
 
 
-        <select class="mx-auto" id="dropdown2" >
+     {{-- country --}}
+
+  <div class="intro-x dropdown w-8 h-8 mr-5">
+    <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110" role="button" aria-expanded="false" data-tw-toggle="dropdown">
+        @if(session()->get('country')->iso=='EG')  <img alt="Midone - HTML Admin Template" src="{{ asset('adminpanel/images/egypt-flag-icon.svg') }}">@else  <img alt="Midone - HTML Admin Template" src="{{ asset('adminpanel/images/saudi-arabia-flag-icon.svg') }}"> @endif
+    </div>
+    <div class="dropdown-menu w-56">
+        <ul class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
+            @foreach ($countries as $c )
+
+            <li class="p-2">
+                <a href="{{route('set.country',$c->id)}}" class="">  <div class="font-medium">{{$c->nicename}}</div>
+
+                </a>
+            </li>
+            @endforeach
+
+        </ul>
+    </div>
+</div>
+
+    {{-- end country --}}
+
+
+
+
+        {{-- <select class="mx-auto" id="dropdown2" >
             <option>Gover</option>
 
         </select>
@@ -674,7 +702,7 @@
         <select class="mx-auto"  id="dropdown3">
             <option>Zone</option>
 
-        </select>
+        </select> --}}
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
@@ -946,35 +974,6 @@
 {{--                        </li>--}}
 {{--                    </ul>--}}
                 </li>
-
-                <li>
-                    <a href="{{url('admin/products')}}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="tag"></i> </div>
-                        <div class="side-menu__title">
-                            Products
-                        </div>
-                    </a>
-{{--                    <ul class="">--}}
-{{--                        <li>--}}
-{{--                            <a href="side-menu-light-dashboard-overview-1.html" class="side-menu">--}}
-{{--                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>--}}
-{{--                                <div class="side-menu__title"> Side Menu </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="simple-menu-light-dashboard-overview-1.html" class="side-menu">--}}
-{{--                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>--}}
-{{--                                <div class="side-menu__title"> Simple Menu </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="top-menu-light-dashboard-overview-1.html" class="side-menu">--}}
-{{--                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>--}}
-{{--                                <div class="side-menu__title"> Top Menu </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-                </li>
                 <li>
                     <a href="{{url('admin/advertising')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="clipboard"></i> </div>
@@ -1073,15 +1072,22 @@
 {{--                    </ul>--}}
                 </li>
                 <li>
-                    <a href="{{url('admin/productive-families')}}" class="side-menu">
+                    <a href="{{url('admin/providers')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="briefcase"></i> </div>
-                        <div class="side-menu__title"> Total Productive Families </div>
+                        <div class="side-menu__title"> {{__('Total Productive Families')}} </div>
                     </a>
                 </li>
                 <li>
-                    <a href="side-menu-light-file-manager.html" class="side-menu">
+                    <a href="{{url('admin/products')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                        <div class="side-menu__title"> File Manager </div>
+                        <div class="side-menu__title"> {{__('Products')}} </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{url('admin/orders')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                        <div class="side-menu__title"> {{__('Orders')}} </div>
                     </a>
                 </li>
                 <li>

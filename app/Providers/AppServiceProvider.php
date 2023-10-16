@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $countries = Countries::all();
         $country   = Countries::first();
-        Session::put('country', $country->id);
+        // Session::put('country', $country->id);
         View::share([
             'countries' =>  $countries,
         ]);

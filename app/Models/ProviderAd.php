@@ -7,6 +7,7 @@ use App\Libs\Misc;
 use Request;
 
 class ProviderAd extends BaseModel {
+    protected $append=['title_field','des_field'];
 
     protected $guarded = [
     ];
@@ -15,7 +16,23 @@ class ProviderAd extends BaseModel {
     public $table = "provider_ads";
 
 	public function getImageAttribute($value) {
-		return 	env('APP_URL')."/storage/Ads_images/".$value;
+		return 	asset("/storage/Ads_images/".$value);
+	}
+	public function getTitleFieldAttribute() {
+        if(app()->getLocale()=='ar'){
+            return $this->title_ar;
+        }else{
+            return $this->title;
+        }
+
+	}
+	public function getDesFieldAttribute() {
+        if(app()->getLocale()=='ar'){
+            return $this->description_ar;
+        }else{
+            return $this->description;
+        }
+
 	}
 
 	public function provider() {

@@ -32,6 +32,7 @@ class Category extends BaseModel {
         return $this->belongsToMany(Countries::class,'category_countries','category_id','country_id');
     }
     public function products() {
-            return $this->hasMany(Product::class);
-        }
+        return $this->hasMany(Product::class);
+    }
+
 }

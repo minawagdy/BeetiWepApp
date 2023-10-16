@@ -11,63 +11,132 @@
 <script src="{{asset('adminpanel/js/app.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+
+{{-- get zone from gov --}}
 <script>
-        $(document).ready(function() {
-        // Event listener for the first select element
-            $('#dropdown1').val(63);
-        $('#dropdown1').change(function() {
-            var parentId = $(this).val();
+    // Wait for the document to finish loading
+    $(document).ready(function() {
+      // Get a reference to the category and subcategory select inputs
+      var categorySelect = $('#gov-select');
+      var subcategorySelect = $('#zone-select');
 
-            if (parentId) {
-                // Make an AJAX request to fetch the zones based on the selected parent zone
-                $.ajax({
-                    url: "{{ url('admin/dropdown1')}}",
-                    type: "GET",
-                    data: { parent_id: parentId },
-                    success: function(response) {
-
-                        // Update the options of the second select element
-                        $('#dropdown2').html('<option value="">Select Zone 2</option>');
-                        $.each(response, function(key, zone) {
-                            console.log(zone.title)
-                            $('#dropdown2').append('<option value="' + zone.id + '">' + zone.title + '</option>');
-                        });
-                    }
-                });
-            } else {
-                // Reset the second and third select elements if the first select element is changed back to the default option
-                $('#dropdown2').html('<option value="">Select Zone 2</option>');
-                $('#dropdown3').html('<option value="">Select Zone 3</option>');
-            }
-        });
-        });
-        // Event listener for the second select element
-
-        $('#dropdown2').change(function() {
-        var parentId = $(this).val();
-        if (parentId) {
-        // Make an AJAX request to fetch the zones based on the selected parent zone
+      // Add a change event listener to the category select input
+      categorySelect.change(function() {
+        // Make an AJAX request to retrieve the subcategories for the selected category
         $.ajax({
-         url: '/dropdown2/'+ parentId  ,
-        type: "GET",
-        data: { parent_id: parentId },
-        success: function(response) {
-        // Update the options of the third select element
-        $('#dropdown3').html('<option value="">Select Zone 3</option>');
-        $.each(response, function(key, zone) {
-        $('#dropdown3').append('<option value="' + zone.id + '">' + zone.name + '</option>');
-    });
-    }
-    });
-    } else {
-        // Reset the third select element if the second select element is changed back to the default option
-        $('#zone3').html('<option value="">Select Zone 3</option>');
-    }
-    });
+          url: '/get-subcategories/'+ categorySelect.val(),
+          type: 'GET',
 
-            $( function() {
-            $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-        } );
+          dataType: 'json',
+          success: function(data) {
+            // Update the options of the subcategory select input
+            subcategorySelect.empty().append('<option value="">Select a Zone...</option>');
+            $.each(data, function(index, subcategory) {
+              subcategorySelect.append('<option value="' + subcategory.id + '">' + subcategory.name + '</option>');
+            });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.error(textStatus, errorThrown);
+          }
+        });
+      });
+    });
+  </script>
+{{-- end script zone --}}
+
+
+{{-- image preview product --}}
+<script>
+    $(document).ready(function() {
+        $('#horizontal-form-1').on('change', function() {
+            var files = $(this)[0].files;
+            var filePreviews = [];
+
+            $('#previewContainer').empty();
+
+            for (var i = 0; i < files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var file = e.target.result;
+                    filePreviews.push(file);
+
+                    var imagePreview = $('<div>').addClass('image-preview');
+                    imagePreview.css('background-image', 'url(' + file + ')');
+                    $('#previewContainer').append(imagePreview);
+
+                    var removeButton = $('<span>').addClass('remove-button');
+                    removeButton.html('<i class="fas fa-trash"></i>');
+                    imagePreview.append(removeButton);
+
+                    removeButton.on('click', function() {
+                        var index = $(this).parent('.image-preview').index();
+                        filePreviews.splice(index, 1);
+                        $(this).parent('.image-preview').remove();
+                    });
+                }
+                reader.readAsDataURL(files[i]);
+            }
+
+            // Use the filePreviews array for further processing or upload excluding the removed image.
+            console.log(filePreviews);
+        });
+    });
+</script>
+{{-- end preview --}}
+
+
+<script>
+    $(document).ready(function() {
+    // Event listener for the first select element
+        $('#dropdown1').val();
+    $('#dropdown1').change(function() {
+        var parentId = $(this).val();
+
+        if (parentId) {
+            // Make an AJAX request to fetch the zones based on the selected parent zone
+            $.ajax({
+                // url: "{{ url('admin/dropdown1')}}",
+                url: '/setCountry/' + parentId,
+                type: "GET",
+                // data: { parent_id: parentId },
+                success: function(response) {
+                  console.log('success');
+                }
+            });
+        } else {
+            console.log('error');
+        }
+    });
+    });
+    // Event listener for the second select element
+
+    $('#dropdown2').change(function() {
+    var parentId = $(this).val();
+    if (parentId) {
+    // Make an AJAX request to fetch the zones based on the selected parent zone
+    $.ajax({
+     url: '/dropdown2/'+ parentId  ,
+    type: "GET",
+    data: { parent_id: parentId },
+    success: function(response) {
+    // Update the options of the third select element
+    $('#dropdown3').html('<option value="">Select Zone 3</option>');
+    $.each(response, function(key, zone) {
+    $('#dropdown3').append('<option value="' + zone.id + '">' + zone.name + '</option>');
+});
+}
+});
+} else {
+    // Reset the third select element if the second select element is changed back to the default option
+    $('#zone3').html('<option value="">Select Zone 3</option>');
+}
+});
+
+        $( function() {
+        $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    } );
 
 
 </script>
@@ -129,46 +198,27 @@
                 }
             });
         });
-    });
 
-    $(document).ready(function() {
-        $('.checkboxAdsId').change(function() {
-            var checkboxValue = $(this).is(':checked')? 1 : 0;;
-            var adsId = $(this).data('ads-id');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: '{{ route('checkbox.ads.update') }}',
-                type: 'GET',
-                data: {
-                    checkboxValue: checkboxValue,
-                    adsId: adsId
-                },
-                success: function(response) {
-                    console.log('Checkbox updated successfully');
-                },
-                error: function(xhr) {
-                    console.log('Error updating checkbox');
-                }
-            });
-        });
-    });
-    var i = 0;
-       
+
+        // dynamic input prices
+
+        var i = 0;
+
        $("#add").click(function(){
-      
+
            ++i;
-      
+
            $("#dynamicTable").append('<tr><td><input type="text" name="prices['+i+'][title]" placeholder="Enter your Title" class="form-control" /></td><td><input type="text" name="prices['+i+'][title_ar]" placeholder="Enter your Title Ar" class="form-control" /></td><td><input type="text" name="prices['+i+'][price]" placeholder="Enter your Price" class="form-control" /></td><td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
        });
-      
-       $(document).on('click', '.remove-tr', function(){  
+
+       $(document).on('click', '.remove-tr', function(){
             $(this).parents('tr').remove();
-       });  
-      
+       });
+
+        // end
+
+
+    });
 </script>
 
 <!-- END: JS Assets-->

@@ -88,7 +88,7 @@
                 <td>
                     <a href="" class="font-medium whitespace-nowrap">{{$category->title}}</a>
                 </td>
-                
+
                 <td class="w-40">
                     <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
                         <input   class="show-code form-check-input mr-0 ml-3 checkboxId" type="checkbox" @if($category->published==1) {{'checked'}}@endif value="{{$category->published}}" name="ctegoryId" data-category-id="{{$category->id}}">

@@ -12,7 +12,7 @@
                     Add Advertising
                 </h2>
 
-                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{route('advertising.store')}}" enctype="multipart/form-data">
+                <form  method="post" action="{{route('advertising.store')}}" enctype="multipart/form-data">
 
                 @csrf
 
@@ -25,21 +25,21 @@
                         <input id="vertical-form-1" type="text" class="form-control" name="title" value="{{ old('title') }}">
                     </div>
                     @error('title')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div class="mt-3">
                         <label for="vertical-form-1" class="form-label">Title Ar</label>
                         <input id="vertical-form-1" type="text" class="form-control" name="title_ar" value="{{ old('title_ar') }}">
                     </div>
                     @error('title_ar')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div class="mt-3">
                         <label for="vertical-form-1" class="form-label">Link</label>
                         <input id="vertical-form-1" type="text" class="form-control" name="link" value="{{ old('link') }}">
                     </div>
                     @error('link')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div class="mt-3">
                         <label for="vertical-form-2" class="form-label">Description</label>
@@ -56,21 +56,22 @@
                         <input id="vertical-form-2" class="form-control" type="file" name="image"></input>
                     </div>
                     @error('image')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div>
-                        <label>Providers</label>
+                        <label>Provider</label>
                         <div class="mt-2">
                             <select data-placeholder="Select Provider" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="provider_id">
-                                <option selected="true" value="">Select Provider</option>
-                                @foreach($providers as $provider)
-                                <option value="{{$provider->id}}" >{{$provider->name}}</option>
+                                <option value="" disabled="true">Select Provider</option>
+
+                                @foreach($providers as $row)
+                               <option value="{{$row->id}}">{{$row->name}}</option>
                                @endforeach
                             </select>
 
                     </div>
                         @error('provider_id')
-                        <div class="error">{{ $message }}</div>
+                        <div class="error text-danger">{{ $message }}</div>
                         @enderror
 
                         <div class="mt-3">
@@ -78,7 +79,7 @@
                             <input id="datepicker" type="text" class="form-control" name="expiry_date" value="{{ old('expiry_date') }}">
                         </div>
                         @error('expiry_date')
-                        <div class="error">{{ $message }}</div>
+                        <div class="error text-danger">{{ $message }}</div>
                         @enderror
 
                     <button class="btn btn-primary mt-5">{{__('Submit')}}</button>

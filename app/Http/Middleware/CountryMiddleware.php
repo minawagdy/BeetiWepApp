@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use App\Models\Countries;  //country model
+use Closure;
+use Request;
+use Route;
+class CountryMiddleware
+{
+   /**
+    * Handle an incoming request.
+    *
+    * @param \Illuminate\Http\Request $request
+    * @param \Closure                 $next
+    *
+    * @return mixed
+    */
+   public function handle($request, Closure $next)
+   {
+    $country= Countries::where('iso','EG')->first();
+    $request->session()->put('country', $country);
+
+    $request->session()->save();
+    return $next($request);
+   }
+}

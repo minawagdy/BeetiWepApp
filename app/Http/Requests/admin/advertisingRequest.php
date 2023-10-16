@@ -21,7 +21,7 @@ class advertisingRequest extends FormRequest
      */
     public function rules(): array
     {
-        return  [
+        $rules=  [
             'title'    => 'required',
             'title_ar' => 'required',
             // 'image'    => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -31,13 +31,20 @@ class advertisingRequest extends FormRequest
 
         ];
 
+        if ($this->getMethod() == 'POST') {
+            $rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+        } else {
+            $rules['image'] = 'sometimes|image';
+        }
+        return $rules;
+
     }
 
     public function messages()
     {
         return [
-//            'title.required' => 'Title is required!',
-//            'title_ar.required' => 'Title Ar is required!',
+           'title.required' => 'Title is required!',
+           'title_ar.required' => 'Title Ar is required!',
         ];
     }
 

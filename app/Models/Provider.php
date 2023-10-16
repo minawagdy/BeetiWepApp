@@ -37,7 +37,7 @@ class Provider extends Authenticatable {
 //	}
      public function getProfileImgAttribute($value) {
         if ($value != null) {
-            return env('APP_URL') . "/storage/profile_images/" . $value;
+            return 	asset("/storage/profile_images/".$value);
         }else{
             return @$this->images[0]->image_name;
         }
@@ -146,8 +146,8 @@ class Provider extends Authenticatable {
 
         static::deleting(function($provider) {
              $provider->categories()->delete();
-             $provider->setPasswordAttribute()->delete();
-             $provider->getProfileImg()->delete();
+            //  $provider->setPasswordAttribute()->delete();
+            //  $provider->getProfileImg()->delete();
              $provider->images()->delete();
              $provider->paymentMethods()->delete();
 

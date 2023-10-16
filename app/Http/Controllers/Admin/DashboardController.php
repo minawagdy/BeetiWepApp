@@ -20,6 +20,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+        // dd( $selectedCountry);
         [$providerCount,$orderCount,$productNotApprovedCount,$providerNotApprovedCount,$countries] = $this->dashboardRepository->getData();
 
         return view('admin.dashboard.index',compact('providerCount','orderCount','productNotApprovedCount','providerNotApprovedCount','countries'));

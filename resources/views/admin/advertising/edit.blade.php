@@ -13,7 +13,7 @@
                     Edit Advertising
                 </h2>
 
-                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{route('advertising.update',['id' => $row->id])}}" enctype="multipart/form-data">
+                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{route('advertising.update',['id' => $id])}}" enctype="multipart/form-data">
                 @method('PUT')
 
                 @csrf
@@ -27,21 +27,21 @@
                         <input id="vertical-form-1" type="text" class="form-control" name="title" value="{{ $row->title }}">
                     </div>
                     @error('title')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div class="mt-3">
                         <label for="vertical-form-1" class="form-label">Title Ar</label>
                         <input id="vertical-form-1" type="text" class="form-control" name="title_ar" value="{{$row->title_ar}}">
                     </div>
                     @error('title_ar')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div class="mt-3">
                         <label for="vertical-form-1" class="form-label">Link</label>
                         <input id="vertical-form-1" type="text" class="form-control" name="link" value="{{$row->link}}">
                     </div>
                     @error('link')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error text-danger">{{ $message }}</div>
                     @enderror
                     <div class="mt-3">
                         <label for="vertical-form-2" class="form-label">Description</label>
@@ -55,34 +55,30 @@
 
                     <div class="mt-3">
                         <label for="vertical-form-2" class="form-label">Image</label>
-                        <input id="vertical-form-2" class="form-control" type="file" name="image"></input>
+                        <input id="vertical-form-2" class="form-control" type="file" name="image" >
                     </div>
-                    @error('image')
-                    <div class="error">{{ $message }}</div>
-                    @enderror
                     <div>
-                        <label>Providers</label>
+                        <label>Provider</label>
                         <div class="mt-2">
                             <select data-placeholder="Select Provider" class="tom-select w-full tomselected" id="tomselect-1" tabindex="-1" hidden="hidden" name="provider_id">
-                                <option value="{{$row->provider->id}}" selected="true">{{$row->provider->name}}</option>
-                                @foreach($providers as $provider)
-                                @if($provider->id != $row->provider->id)
-                                <option value="{{$provider->id}}">{{$provider->name}}</option>
-                                @endif
-                                @endforeach
+                                <option value="" disabled="true">Select Provider</option>
+
+                                @foreach($providers as $val)
+                               <option value="{{$val->id}}"@if(($val->id) == $row->provider_id )selected @endif >{{$val->name}}</option>
+                               @endforeach
                             </select>
 
-                        </div>
+                    </div>
                         @error('provider_id')
-                        <div class="error">{{ $message }}</div>
+                        <div class="error text-danger">{{ $message }}</div>
                         @enderror
 
                         <div class="mt-3">
                             <label for="vertical-form-1" class="form-label">Expiry Date</label>
-                            <input id="datepicker" type="text" class="form-control" name="expiry_date" value="{{$row->expiry_date}}">
+                            <input id="datepicker" type="text" class="form-control" name="expiry_date" value="{{\Carbon\Carbon::parse($row->expiry_date)->format('Y-m-d')}}">
                         </div>
                         @error('expiry_date')
-                        <div class="error">{{ $message }}</div>
+                        <div class="error text-danger">{{ $message }}</div>
                         @enderror
 
                         <button class="btn btn-primary mt-5">{{__('Submit')}}</button>

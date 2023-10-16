@@ -14,13 +14,13 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function getAllCategories()
     {
         $categories      = Category::whereHas('countries', function ($query) {
-            $query->where('country_id', Session::get('country'));
+            $query->where('country_id', Session::get('country')->id);
         })->get();
         $categoryCount = Category::whereHas('countries', function ($query) {
-            $query->where('country_id', Session::get('country'));
+            $query->where('country_id', Session::get('country')->id);
         })->withCount('countries')->count();
         $categorytNotApprovedCount =Category::whereHas('countries', function ($query) {
-            $query->where('country_id', Session::get('country'));
+            $query->where('country_id', Session::get('country')->id);
         })->withCount('countries')->where('published',0)->count();
         return view('admin.category.index',compact('categories','categoryCount','categorytNotApprovedCount'));
 
@@ -47,9 +47,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function deleteCategory($ctegoryId)
     {
-         $deleteCat=Category::destroy($ctegoryId);
-            return  redirect()->route('categories');
-        
+        Category::destroy($ctegoryId);
     }
 
     public function createCategory(categoryRequest $request)
@@ -80,6 +78,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function editCategory($ctegoryId)
     {
         $category= Category::find($ctegoryId);
+
         if (!$category) {
 
             // Handle the case when the item is not found
@@ -90,15 +89,12 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function updateCategory($ctegoryId, categoryRequest $request)
     {
-       
-        $row = Category::find($ctegoryId);
-
-
+        dd(1);
         $validatedData = $request->validated();
 
         $validator = Validator::make($request->all(),  $validatedData);
 
-        if ($row->update($request->except(["logo","country"]))) {
+        if ($row->update($request->except(["logo"]))) {
 
             $input = $request->file('logo');
 
@@ -111,14 +107,12 @@ class CategoryRepository implements CategoryRepositoryInterface
             }else{
                 unset($input);
             }
-            // if($request->has('country')){
-            //     $row->countries()->sync($request->country);
-            //         }
 
 
-            return  redirect()->route('categories');
+            return response()->json(['isSuccessed' => true, "data" => $row, 'error' => null], 200);
         }
 
+        return Order::whereId($ctegoryId)->update($newDetails);
     }
 
 

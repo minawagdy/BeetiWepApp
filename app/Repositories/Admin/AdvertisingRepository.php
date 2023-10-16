@@ -7,36 +7,26 @@ use App\Interfaces\Admin\AdvertisingRepositoryInterface;
 use App\Models\ProviderAd;
 use App\Models\Provider;
 use Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
+
 class AdvertisingRepository implements AdvertisingRepositoryInterface
 {
 
     public function getAllAdvertising()
     {
-        $all_ads = \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
-            $q->where('country', '=', Session::get('country'));
-        })->get()->count();
+        //  dd(Session::get('country'));
 
-        $active_ads = \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
-            $q->where('country', '=', Session::get('country'));
-        })->where('is_active',1)->get()->count();
-        $deactive_ads = \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
-            $q->where('country', '=', Session::get('country'));
-        })->where('is_active',0)->get()->count();
-
-
-    
-        $ads  =  \App\Models\ProviderAd::with([])->whereHas('provider', function ($q) {
-                $q->where('country', '=', Session::get('country'));
-            })->get();
-
-        return view('admin.advertising.index',compact('ads','all_ads','active_ads','deactive_ads'));
-
+        $ads  = ProviderAd::whereHas('provider', function ($query)  {
+                $query->where('country', '=', Session::get('country')->id);
+            })->paginate(20);
+           $approved_ads = ProviderAd::whereHas('provider', function ($query)  {
+            $query->where('country', '=', Session::get('country')->id);
+        })->where('is_active','1')->count();
+        return view('admin.advertising.index',compact('ads','approved_ads'));
     }
     public function  createAdvertising(){
-        $providers = Provider::where('country', Session::get('country'))->where('published',1)->orderby('name')->get();
+    $providers = Provider::where('status',1)->where('country', '=', session::get('country')->id)->get();
         return view('admin.advertising.create',compact('providers'));
-
     }
     public function storeAdvertising(advertisingRequest $request)
     {
@@ -53,21 +43,23 @@ class AdvertisingRepository implements AdvertisingRepositoryInterface
                 $request->image->move(public_path('/storage/Ads_images'), $imageName);
                 $row->image = $imageName;
                 $row->save();
-                return  redirect()->route('advertising');
+
 
             }
-
+                session() -> flash('Success', __('Added Successfully'));
         }
+        return redirect()->route('advertising');
     }
     public function editAdvertising($id){
 
         $row = ProviderAd::findOrFail($id);
-        $providers = Provider::where('country', Session::get('country'))->where('published',1)->orderby('name')->get();
+        $providers = Provider::where('status',1)->where('country', '=', Session::get('country')->id)->get();
 
-        return view('admin.advertising.edit',compact('row','providers'));
+        return view('admin.advertising.edit',compact('row','id','providers'));
     }
     public function updateAdvertising($id, advertisingRequest $request)
     {
+        // dd($request->all());
         $validatedData = $request->validated();
 
         $row = ProviderAd::findOrFail($id);
@@ -79,27 +71,38 @@ class AdvertisingRepository implements AdvertisingRepositoryInterface
                 $row->image = $imageName;
                 $row->save();
             }
+            session() -> flash('Success', __('Updated Successfully'));
         }
-        return  redirect()->route('advertising');
- 
+
+        return redirect()->route('advertising');
     }
 
     public function deleteAdvertising($id) {
 
         $row = ProviderAd::findOrFail($id);
         $row->delete();
-        return  redirect()->route('advertising');
+        session() -> flash('Success', __('Deleted Successfully'));
+        return redirect()->route('advertising');
+
+    }
+    public function changeStatus($id) {
+
+        $row = ProviderAd::findOrFail($id);
+
+            if($row->is_active == 0){
+                $row->is_active = 1;
+            }else{
+                $row->is_active = 0;
+
+
+            }
+
+        $row->save();
+        session() -> flash('Success', __('Updated Successfully'));
+        return redirect()->route('advertising');
 
     }
 
-    public function updateCheckboxAds($adsId, $checkboxValue)
-    {
-        $ads = ProviderAd::find($adsId);
-        $ads->is_active = $checkboxValue;
-        $ads->save();
-
-        return $ads;
-    }
 
 
 

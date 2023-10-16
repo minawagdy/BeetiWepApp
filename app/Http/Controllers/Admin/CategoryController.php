@@ -37,8 +37,9 @@ class CategoryController extends Controller
     }
     public function create()
     {
-        return $this->categoryRepository->create();
+        [$countries]=$this->categoryRepository->create();
 
+        return view('admin.category.create',compact('countries'));
     }
 
     public function store(categoryRequest $request)
@@ -66,15 +67,17 @@ class CategoryController extends Controller
     }
     public function update(categoryRequest $request)
     {
-    
+        dd(1);
         $ctegoryId = $request->route('id');
         return $this->categoryRepository->updateCategory($ctegoryId, $request);
 
     }
 
-    public function destroy($id)
+    public function destroy(Request $request): JsonResponse
     {
-        return $this->categoryRepository->deleteCategory($id);
+        $ctegoryId = $request->route('id');
+        $this->categoryRepository->deleteOrder($ctegoryId);
 
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
