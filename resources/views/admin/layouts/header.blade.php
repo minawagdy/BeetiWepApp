@@ -1092,6 +1092,18 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{url('admin/countries')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                        <div class="side-menu__title"> {{__('Zones')}} </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('admin/contacts')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                        <div class="side-menu__title"> {{__('Contacts')}} </div>
+                    </a>
+                </li>
+                {{-- <li>
                     <a href="side-menu-light-point-of-sale.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
                         <div class="side-menu__title"> Point of Sale </div>
@@ -1605,7 +1617,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- END: Side Menu -->
