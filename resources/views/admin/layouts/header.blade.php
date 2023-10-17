@@ -670,6 +670,7 @@
 
      {{-- country --}}
 
+
   <div class="intro-x dropdown w-8 h-8 mr-5">
     <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110" role="button" aria-expanded="false" data-tw-toggle="dropdown">
         @if(session()->get('country')->iso=='EG')  <img alt="Midone - HTML Admin Template" src="{{ asset('adminpanel/images/egypt-flag-icon.svg') }}">@else  <img alt="Midone - HTML Admin Template" src="{{ asset('adminpanel/images/saudi-arabia-flag-icon.svg') }}"> @endif

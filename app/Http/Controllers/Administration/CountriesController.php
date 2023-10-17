@@ -49,7 +49,7 @@ class CountriesController extends Administrator
            // 'bank_name' => 'required',
            // 'bank_name_ar' => 'required',
         ];
-        $this->middleware('Lang');
+        // $this->middleware('Lang');
     }
 
     public function getBankAccounts(Request $request,$id) {

@@ -103,7 +103,7 @@
 
                                                 <td>
                                                     <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                        <a href="{{url('administration/orders/view',$r->id)}}" target="_blank"><i class="icofont-eye text-success"></i></a>
+                                                        <a href="{{url('admin/orders/view',$r->id)}}" target="_blank" class="btn btn-outline-secondary"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="eye" data-lucide="eye" class="lucide lucide-eye block mx-auto"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a>
                                                         {{-- <form action="{{ route('category.destroy', $r->id) }}" method="post" id='delform' style="display: inline-block">
                                                             @csrf
                                                             @method('delete')

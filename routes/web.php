@@ -97,19 +97,27 @@ Route::delete('products/delete/{product_id}', 'App\Http\Controllers\Administrati
 Route::get('products/delete-image/{image_id}', 'App\Http\Controllers\Administration\Products@getDeleteImage');
 Route::get('products/create', 'App\Http\Controllers\Administration\Products@getCreate')->name('products.create');
 Route::post('products/store', 'App\Http\Controllers\Administration\Products@postCreate')->name('products.store');
-
-
 Route::post('updateStatus/{id}','App\Http\Controllers\Administration\Products@updateStatus')->name('product.updateStatus');
-
-
 // end products
+
 
 
 // orders
 Route::get('orders', 'App\Http\Controllers\Administration\OrdersController@getIndex');
-Route::get('order-details/{order_id}', 'App\Http\Controllers\Administration\Orders@getView');
+Route::get('orders/view/{order_id}', 'App\Http\Controllers\Administration\OrdersController@getView');
 //end orders
 
+
+// countries
+Route::get('countries', 'App\Http\Controllers\Administration\CountriesController@getIndex');
+Route::get('countries/active/{id}', 'App\Http\Controllers\Administration\CountriesController@getActive');
+// end countries
+
+// contatct
+
+Route::resource('contacts','App\Http\Controllers\Administration\ContactsController');
+
+// end contcat
 
     Route::get('/testSession', function () {
         return session()->get('country');

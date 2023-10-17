@@ -28,9 +28,9 @@ class DashboardRepository implements DashboardRepositoryInterface
 
         $providerNotApprovedCount = Provider::where('country', 63)->where('status',6)->count();
 
-        $countries = Countries::all();
+        // $countries = Countries::all();
 
-        return [$providerCount,$orderCount,$productNotApprovedCount,$providerNotApprovedCount,$countries];
+        return [$providerCount,$orderCount,$productNotApprovedCount,$providerNotApprovedCount];
 
 
     }

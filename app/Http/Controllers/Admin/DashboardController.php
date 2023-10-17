@@ -21,9 +21,9 @@ class DashboardController extends Controller
     public function index()
     {
         // dd( $selectedCountry);
-        [$providerCount,$orderCount,$productNotApprovedCount,$providerNotApprovedCount,$countries] = $this->dashboardRepository->getData();
+        [$providerCount,$orderCount,$productNotApprovedCount,$providerNotApprovedCount] = $this->dashboardRepository->getData();
 
-        return view('admin.dashboard.index',compact('providerCount','orderCount','productNotApprovedCount','providerNotApprovedCount','countries'));
+        return view('admin.dashboard.index',compact('providerCount','orderCount','productNotApprovedCount','providerNotApprovedCount'));
     }
     public function getDropdown1(Request $request)
     {
