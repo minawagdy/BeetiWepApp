@@ -1093,8 +1093,14 @@
                 </li>
                 <li>
                     <a href="{{url('admin/countries')}}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                        <div class="side-menu__icon"> <i data-lucide="map-pin"></i> </div>
                         <div class="side-menu__title"> {{__('Zones')}} </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('admin/notifications')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="bell-ring"></i> </div>
+                        <div class="side-menu__title"> {{__('Notifications')}} </div>
                     </a>
                 </li>
                 <li>
@@ -1103,6 +1109,55 @@
                         <div class="side-menu__title"> {{__('Contacts')}} </div>
                     </a>
                 </li>
+
+                <li class="side-nav__devider my-6"></li>
+
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="settings"></i></div>
+                        <div class="side-menu__title">
+                            {{__('Settings')}}
+                            <div class="side-menu__sub-icon ">  <i data-lucide="chevron-down"></i>  </div>
+                        </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a href="{{route('settings.wallet')}}" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="wallet"></i> </div>
+                                <div class="side-menu__title"> Wallet Settings </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('settings.payment')}}" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
+                                <div class="side-menu__title"> Payment Settings </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('settings.versions')}}" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="smartphone"></i> </div>
+                                <div class="side-menu__title"> Versions Settings </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            {{-- <li>
+                <ul class="">
+                                           <li>
+                                             <a href="side-menu-light-categories.html" class="side-menu">
+                                                 <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                                 <div class="side-menu__title"> Categories </div>
+                                             </a>
+                                         </li>
+                                         <li>
+                                             <a href="side-menu-light-add-product.html" class="side-menu">
+                                                 <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                                 <div class="side-menu__title"> Add Product </div>
+                                             </a>
+                                         </li>
+                </ul>
+            </li> --}}
                 {{-- <li>
                     <a href="side-menu-light-point-of-sale.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>

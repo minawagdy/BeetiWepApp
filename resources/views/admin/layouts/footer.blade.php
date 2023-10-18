@@ -13,7 +13,6 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 
-
 {{-- get zone from gov --}}
 <script>
     // Wait for the document to finish loading
@@ -236,6 +235,82 @@ if(c <= 4){
 
         });
 </script>
+
+
+
+{{-- notification --}}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#providers_list').hide();
+        $('#customers_list').hide();
+        $('#type').on('change', function(e) {
+            var type = e.target.value;
+            if (type == 'all providers') {
+                $('#providers_list').hide();
+                $('#customers_list').hide();
+                $('#notify_form').attr('action', '{{url("/admin/notifications/all-provider")}}');
+            } else if (type == 'all customers') {
+                $('#providers_list').hide();
+                $('#customers_list').hide();
+                $('#notify_form').attr('action', '{{url("/admin/notifications/all-customer")}}');
+            } else if (type == 'provider') {
+                $('#providers_list').show();
+                $('#customers_list').hide();
+                $('#notify_form').attr('action', '{{url("/admin/notifications/provider")}}');
+            } else if (type == 'customer') {
+                $('#customers_list').show();
+                $('#providers_list').hide();
+                $('#notify_form').attr('action', '{{url("/admin/notifications/customer")}}');
+            }
+        });
+    });
+</script>
+<script>
+    $('#row1').hide();
+    $('#row2').hide();
+    var c = 0;
+    $('#morePrices').click(function() {
+        c += 1;
+        if (c <= 2) {
+            $('#row' + c).show();
+        }
+    });
+</script>
+<script>
+    var counter = 0
+
+    function add_more_field() {
+        counter += 3;
+        html = '<div class="row" id="row' + counter + '">\
+                <div class="col-3">\
+                    <label>{{__("Title")}}</label>\
+                    <input type="text" class="form-control" name="prices[' + counter + '][title]" placeholder="{{__("Title")}}">\
+                </div>\
+                <div class="col-3">\
+                    <label>{{__("Title")}} {{__("Ar")}}</label>\
+                    <input type="text" class="form-control" name="prices[' + counter + '][title_ar]" placeholder="{{__("Title")}} {{__("Ar")}}">\
+                </div>\
+                <div class="col-3">\
+                    <label>{{__("Price")}}</label>\
+                    <input type="text" class="form-control" name="prices[' + counter + '][price]" placeholder="{{__("L.E.")}}">\
+                </div>\
+</div>';
+        $('#price_field').append(html);
+    }
+</script>
+
+{{-- select 2 --}}
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+</script>
+{{-- end select 2 --}}
+{{-- end notifications --}}
+
+
 
 <!-- END: JS Assets-->
 </body>

@@ -37,9 +37,9 @@ class CategoryController extends Controller
     }
     public function create()
     {
-        [$countries]=$this->categoryRepository->create();
+      $this->categoryRepository->create();
 
-        return view('admin.category.create',compact('countries'));
+        return view('admin.category.create');
     }
 
     public function store(categoryRequest $request)

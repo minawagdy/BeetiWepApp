@@ -19,12 +19,12 @@ class SettingsController extends Controller
 
     public $rules;
     public function getSettings(){
-        $countries = Countries::all();
+        // $countries = Countries::all();
         $providers = Provider::where([['status','1'],['country', '=', session()->get('country')->id]])->get();
         $provider_with_special_fees = Provider::where([['status','1'],['country', '=', session()->get('country')->id]])->whereNotNull('fees_percentage')->get();
 
         // dd($provider_with_special_fees);
-        return view('admin.settings.wallet',compact('countries','providers','provider_with_special_fees'));
+        return view('admin.settings.wallet',compact('providers','provider_with_special_fees'));
     }
     public function updateFeesSettings(Request $request){
         if($request->has('country_id')){

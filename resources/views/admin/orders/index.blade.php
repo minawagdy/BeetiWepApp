@@ -94,7 +94,7 @@
                                                     <h6 class="mb-3 fw-bold">{{$r->provider->name}} <span class="text-muted small fw-light d-block">{{$r->order_num}}</span></h6>
 
                                                 </td>
-                                                <td>@if($r->order_type_id == 1)<span class="badge bg-info">{{__('Delivery')}}</span> @else<span class="badge bg-danger"> {{__("Pickup")}}@endif</span></td>
+                                                <td>@if($r->order_type_id == 1)<span class="">{{__('Delivery')}}</span> @else<span class=""> {{__("Pickup")}}@endif</span></td>
 
                                                 <td>{{$r->provider->mobile}}</td>
                                                 <td>{{$r->created_at}} </td>

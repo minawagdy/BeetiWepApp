@@ -119,6 +119,39 @@ Route::resource('contacts','App\Http\Controllers\Administration\ContactsControll
 
 // end contcat
 
+// settings
+
+Route::get('settings/wallet','App\Http\Controllers\Administration\SettingsController@getSettings')->name('settings.wallet');
+Route::post('settings/wallet/updateFees','App\Http\Controllers\Administration\SettingsController@updateFeesSettings');
+Route::post('settings/wallet/updateLimit','App\Http\Controllers\Administration\SettingsController@updateLimitSettings');
+
+
+Route::get('settings/payment','App\Http\Controllers\Administration\SettingsController@getPaymnetSettings')->name('settings.payment');
+Route::post('settings/payment/store','App\Http\Controllers\Administration\SettingsController@storePaymentMethod');
+Route::get('settings/payment/active/{id}','App\Http\Controllers\Administration\SettingsController@ActivePayment');
+Route::Delete('settings/payment/delete/{id}','App\Http\Controllers\Administration\SettingsController@deletePayment')->name('payment.destroy');
+
+
+Route::get('settings/versions','App\Http\Controllers\Administration\SettingsController@getVersions')->name('settings.versions');
+Route::post('settings/versions/store','App\Http\Controllers\Administration\SettingsController@updateVersions');
+
+
+// end settings
+
+
+// notifications
+
+    Route::get('notifications', 'App\Http\Controllers\Administration\NotificationsController@getIndex');
+    Route::post('notifications/provider', 'App\Http\Controllers\Administration\NotificationsController@postProvider');
+    Route::post('notifications/customer', 'App\Http\Controllers\Administration\NotificationsController@postCustomer');
+    Route::post('notifications/all-customer', 'App\Http\Controllers\Administration\NotificationsController@postAllCustomer');
+    Route::post('notifications/all-provider', 'App\Http\Controllers\Administration\NotificationsController@postAllProvider');
+// end notofifications
+
+
+
+
+
     Route::get('/testSession', function () {
         return session()->get('country');
       });
