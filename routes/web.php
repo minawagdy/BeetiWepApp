@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Front\IndexController;
 use App\Models\Countries;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Front\WishlistController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,12 +29,18 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/category/1', [IndexController::class, 'getCategory'])->name('category');
-
+Route::post('/wishlist',[IndexController::class, 'toggle'])->name('wishlist.toggle');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-// Auth::routes();
+
+
+Route::get('shop-wishlist', [WishlistController::class, 'index']);
+Route::get('deleteWishlist/{id}', [WishlistController::class, 'delete']);
+
+
+Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -44,6 +52,10 @@ Route::get('setCountry/{country}',function($c){
     // return 'Country Changed successfully to'. session()->get('country');
 })->name('set.country');
 
+Route::get('auth/google', [IndexController::class, 'googleLogin']);
+Route::get('auth/google/callback', [IndexController::class, 'googleCallback']);
+Route::get('auth/facebook', [IndexController::class, 'facebookLogin']);
+Route::get('auth/facebook/callback', [IndexController::class, 'facebookCallback']);
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
@@ -57,7 +69,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('category', [CategoryController::class, 'store'])->name('category.store');
     Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('category/edit/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::put('/category/{id}', 'FormController@update')->name('form.update');
+    // Route::put('/category/{id}', 'FormController@update')->name('form.update');
     Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('dropdown1', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown1']);
     Route::get('dropdown2/{id}', [\App\Http\Controllers\Admin\DashboardController::class,'getDropdown2']);

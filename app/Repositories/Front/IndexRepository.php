@@ -28,7 +28,6 @@ class IndexRepository implements IndexRepositoryInterface
          $query->where('country', 187);
           })->get();
         
-
         return view('front.index',compact('allCategories','categories','products','sliders','categorys'));
 
     }

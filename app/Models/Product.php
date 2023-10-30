@@ -27,6 +27,9 @@ class Product extends BaseModel {
 	public function prices(){
    		return  $this->hasMany('App\Models\ProductPrice','product_id');
  	}
+     public function favorit(){
+        return  $this->hasMany('App\Models\Favorit','product_id');
+  }
 
     public function provider() {
         return $this->belongsTo('App\Models\Provider', "provider_id");
